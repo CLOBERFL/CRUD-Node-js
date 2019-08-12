@@ -1,8 +1,10 @@
 <% include partials/_header%>
 
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <form action="/add" method="POST">
@@ -18,18 +20,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>N°</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Operation</th>
+                        <th class="">Operations</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <% for(var i=0; i < tasks.length; i++) { %>
+                    <tr>
+                        <td><%= i + 1  %></td>
+                        <td><%= tasks[i].title %></td>
+                        <td><%= tasks[i].description %></td>
+                        <td><button class="btn btn-success m-1">Done</button>
+                            <button class="btn btn-danger m-1">X</button>
+                            <button class="btn btn-info m-1">Edit</button>
+                        </td>
+                    </tr>
+                    <% } %>
                 </tbody>
             </table>
 
