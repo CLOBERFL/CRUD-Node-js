@@ -10,24 +10,42 @@ router.get('/' , async (req, res) =>{
         tasks
     });
 });
+
+//Agregar
 router.post('/add', async (req , res) =>{
     const task = new Task(req.body);
     await task.save();
     res.redirect('/');
 });
-
+//Borrar
 router.get('/delete/:id', async (req, res) =>{
 
     const {id} = req.params;
     await Task.remove({_id : id});
     res.redirect('/');
 });
+//cambiar estado
 router.get('/turn/:id', async (req, res) =>{
 
     const {id} = req.params;
     const task = await Task.findById(id);
     task.status = !task.status;
     await task.save();
+    res.redirect('/');
+});
+//Editar
+router.get('/edit/:id', async (req, res) =>{
+
+    const {id} = req.params;
+    const task = await Task.findById(id);
+    task.status = !task.status;
+    res.render('edit' , {
+        task
+    });
+});
+router.post('/update/:id', async (req , res) =>{
+    const {id} = req.params;
+    await Task.update({_id : id}, req.body);
     res.redirect('/');
 });
 
